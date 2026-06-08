@@ -4,8 +4,7 @@ node_result.json + results_v1.json(최종 outcome) 비교.
 """
 import json
 import numpy as np
-import matplotlib
-matplotlib.use("Agg")
+from figstyle import KO, EN, NEG  # 공통 팔레트/폰트
 import matplotlib.pyplot as plt
 
 nodes = json.load(open("node_result.json", encoding="utf-8"))
@@ -21,8 +20,8 @@ for i, (k, e) in enumerate(zip(ko_vals, en_vals)):
     ax.plot([k, e], [i, i], color="#cccccc", lw=2.5, zorder=1)
     ax.text(min(k, e) - 0.015, i, f"{abs(k-e)*100:.0f}pp", va="center", ha="right",
             fontsize=8, color="#777")
-ax.scatter(en_vals, ypos, s=130, color="#ff7f0e", label="EN", zorder=3, edgecolor="white", lw=1)
-ax.scatter(ko_vals, ypos, s=130, color="#1f77b4", label="KO", zorder=3, edgecolor="white", lw=1)
+ax.scatter(en_vals, ypos, s=130, color=EN, label="EN", zorder=3, edgecolor="white", lw=1)
+ax.scatter(ko_vals, ypos, s=130, color=KO, label="KO", zorder=3, edgecolor="white", lw=1)
 ax.set_yticks(ypos); ax.set_yticklabels(LABELS)
 ax.set_xlim(0.55, 1.02); ax.set_xlabel("Node accuracy")
 ax.set_title("Per-node fact recognition: KO vs EN are nearly identical")
@@ -57,12 +56,12 @@ print("- node-avg 갭부터 큼 → 언어이해/사실인식 단계부터 붕�
 xlab = ["Per-node\nfact recognition", "Integrated\noutcome"]
 yv = [(node_avg["ko"]-node_avg["en"])*100, (ko_out-en_out)*100 if ko_out else 0.0]
 fig, ax = plt.subplots(figsize=(6.6, 5.2))
-ax.plot([0, 1], yv, "-o", color="#d62728", lw=3, ms=15, zorder=3)
+ax.plot([0, 1], yv, "-o", color=NEG, lw=3, ms=15, zorder=3)
 ax.axhline(0, color="k", lw=0.8)
 ax.annotate(f"{yv[0]:+.1f}pp", (0, yv[0]), textcoords="offset points", xytext=(0, 14),
             ha="center", fontsize=13, fontweight="bold")
 ax.annotate(f"{yv[1]:+.1f}pp", (1, yv[1]), textcoords="offset points", xytext=(0, -24),
-            ha="center", fontsize=13, fontweight="bold", color="#d62728")
+            ha="center", fontsize=13, fontweight="bold", color=NEG)
 # 급락 강조
 ax.annotate(f"{abs(yv[1]-yv[0]):.0f}pp collapse", xy=(0.5, (yv[0]+yv[1])/2),
             xytext=(0.62, (yv[0]+yv[1])/2), fontsize=11, color="#555", va="center")

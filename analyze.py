@@ -4,8 +4,7 @@
 """
 import json
 import numpy as np
-import matplotlib
-matplotlib.use("Agg")
+from figstyle import KO, EN, NEG, POS, BAR, CMAP  # 공통 팔레트/폰트 (matplotlib backend 포함)
 import matplotlib.pyplot as plt
 from collections import Counter, defaultdict
 
@@ -23,7 +22,7 @@ x = np.arange(len(models)); w = 0.35
 fig, ax = plt.subplots(figsize=(9, 5))
 for i, lang in enumerate(langs):
     vals = [acc.get((m, lang), 0) for m in models]
-    bars = ax.bar(x + (i - 0.5) * w, vals, w, label=lang.upper())
+    bars = ax.bar(x + (i - 0.5) * w, vals, w, label=lang.upper(), color=KO if lang == "ko" else EN)
     for b, v in zip(bars, vals):
         ax.text(b.get_x() + b.get_width()/2, v + 0.01, f"{v:.0%}", ha="center", fontsize=9)
 ax.set_xticks(x); ax.set_xticklabels([short(m) for m in models], rotation=15)
@@ -36,7 +35,7 @@ print("→ fig1_model_lang.png")
 # ── Fig2: 언어간 차이 (KO - EN) ──────────────────────────────────
 fig, ax = plt.subplots(figsize=(8, 5))
 diffs = [acc.get((m, "ko"), 0) - acc.get((m, "en"), 0) for m in models]
-colors = ["#d62728" if d < 0 else "#2ca02c" for d in diffs]
+colors = [NEG if d < 0 else POS for d in diffs]
 ax.barh([short(m) for m in models], diffs, color=colors)
 ax.axvline(0, color="k", lw=0.8)
 ax.set_xlabel("Accuracy gap (KO − EN)")
@@ -56,7 +55,7 @@ for r in R.values():
 types = sorted(by_stype, key=lambda t: by_stype[t][0]/by_stype[t][1])
 vals = [by_stype[t][0]/by_stype[t][1] for t in types]
 fig, ax = plt.subplots(figsize=(8, 5))
-ax.bar(types, vals, color="#1f77b4")
+ax.bar(types, vals, color=BAR)
 for i, v in enumerate(vals):
     ax.text(i, v + 0.01, f"{v:.0%}", ha="center", fontsize=9)
 ax.set_ylabel("Accuracy"); ax.set_ylim(0, 1)
@@ -77,7 +76,7 @@ for r in R.values():
             cm[idx[g], idx[p]] += 1
 cm_norm = cm / cm.sum(axis=1, keepdims=True).clip(min=1)
 fig, ax = plt.subplots(figsize=(8, 7))
-im = ax.imshow(cm_norm, cmap="Blues", vmin=0, vmax=1)
+im = ax.imshow(cm_norm, cmap=CMAP, vmin=0, vmax=1)
 ax.set_xticks(range(len(CLASSES))); ax.set_yticks(range(len(CLASSES)))
 ax.set_xticklabels([c.replace("STOP_", "S:") for c in CLASSES], rotation=45, ha="right", fontsize=8)
 ax.set_yticklabels([c.replace("STOP_", "S:") for c in CLASSES], fontsize=8)
@@ -96,7 +95,7 @@ print("→ fig4_confusion.png")
 fig, ax = plt.subplots(figsize=(8, 6))
 en_acc = [acc.get((m, "en"), 0) for m in models]
 gaps = [acc.get((m, "ko"), 0) - acc.get((m, "en"), 0) for m in models]
-ax.scatter(en_acc, gaps, s=90, c="#d62728", zorder=3)
+ax.scatter(en_acc, gaps, s=110, c=NEG, zorder=3, edgecolor="white", lw=0.8)
 for m, x_, y_ in zip(models, en_acc, gaps):
     ax.annotate(short(m), (x_, y_), textcoords="offset points", xytext=(6, 4), fontsize=8)
 # 추세선

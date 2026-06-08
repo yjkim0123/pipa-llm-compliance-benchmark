@@ -7,8 +7,7 @@ RQ3 분석: PIPA 판단 vs GDPR 판단 (같은 모델, 같은 EN 시나리오).
 import json
 from collections import defaultdict, Counter
 import numpy as np
-import matplotlib
-matplotlib.use("Agg")
+from figstyle import KO, NEG  # 공통 팔레트/폰트
 import matplotlib.pyplot as plt
 
 cases = {c["id"]: c for c in json.load(open("dataset_v1.json", encoding="utf-8"))}
@@ -49,7 +48,7 @@ print(f"  PIPA식 STOP 유지(혼동):    {pseudo_stayed}/{pseudo_total}")
 # Fig8: gold_class별 divergence 막대
 golds = sorted(by_gold, key=lambda g: by_gold[g][0]/by_gold[g][1])
 vals = [by_gold[g][0]/by_gold[g][1] for g in golds]
-colors = ["#d62728" if g in PIPA_ONLY else "#1f77b4" for g in golds]
+colors = [NEG if g in PIPA_ONLY else KO for g in golds]
 fig, ax = plt.subplots(figsize=(10, 5))
 ax.barh([g.replace("STOP_", "S:") for g in golds], vals, color=colors)
 for i, v in enumerate(vals):
