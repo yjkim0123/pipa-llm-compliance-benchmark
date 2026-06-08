@@ -16,9 +16,9 @@ for m in models:
     ko, en = acc(m,"ko"), acc(m,"en")
     allacc += [ko, en]
     print(f"  {m.split(':')[0]:8s} {('9b' if '9b' in m else '7b' if '7b' in m else '2b' if '2b' in m else '3b' if '3b' in m else '?'):>3s} {'q8' if 'q8' in m else 'q4'}: KO={ko:.1%} EN={en:.1%} gap={ko-en:+.1%}")
-print(f"  >> 정확도 범위: {min(allacc):.1%} ~ {max(allacc):.1%}  (draft '37%~83%' 확인)")
+print(f"  >> 정확도 범위: {min(allacc):.1%} ~ {max(allacc):.1%}  (draft '38%~83%' 확인)")
 
-print("\n[2] 성능-안전 상관 r (draft 'r=-0.65')")
+print("\n[2] 성능-안전 상관 r (draft 'r=-0.66')")
 en = [acc(m,"en") for m in models]; gap = [acc(m,"ko")-acc(m,"en") for m in models]
 r = np.corrcoef(en, gap)[0,1]
 print(f"  >> Pearson r = {r:.3f}")
@@ -27,7 +27,7 @@ print("\n[3] McNemar (draft p값들)")
 for x in json.load(open("mcnemar_result.json", encoding="utf-8")):
     print(f"  {x['model'].split(':')[0]:8s}: b={x['b_en_only']} c={x['c_ko_only']} p={x['p']:.2e} {x['sig']} ({x['direction']})")
 
-print("\n[4] 노드 진단 (draft '91.5 vs 92.5, -1.0pp / outcome -24.3pp')")
+print("\n[4] 노드 진단 (draft '91.1 vs 92.5, -1.4pp / outcome -23.1pp')")
 nd = json.load(open("node_result.json", encoding="utf-8"))
 NK = ["lawful_basis","is_sensitive","consent_ok","purpose_specified","within_purpose"]
 for l in ["ko","en"]:
@@ -52,7 +52,7 @@ print(f"  전체 divergence = {dv/tot:.0%}")
 for g in ["STOP_PSEUDO_INSTITUTION","STOP_SAFETY","STOP_SENSITIVE_CONSENT","STOP_PURPOSE"]:
     if g in bg: print(f"  {g}: {bg[g][0]/bg[g][1]:.0%}")
 
-print("\n[6] 재현성 (draft 'temp0 sd0.00, temp0.7 sd0.61, gap -18.8~-20')")
+print("\n[6] 재현성 (draft 'temp0 sd0.00, temp0.7 sd<=0.79, gap -17.5~-18.0')")
 st = json.load(open("stability_result.json", encoding="utf-8"))
 for k in ["temp0.0_ko","temp0.0_en","temp0.7_ko","temp0.7_en"]:
     print(f"  {k}: mean={st[k]['mean']:.1%} sd={st[k]['sd']:.2%}")

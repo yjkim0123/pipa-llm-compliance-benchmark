@@ -17,6 +17,19 @@ def gold_to_class(outcome: str) -> str:
 
 random.seed(42)  # 재현성 (Date/random 제약은 스크립트 직접 실행이라 무관)
 
+def _has_batchim(word: str) -> bool:
+    """마지막 한글 음절에 받침(종성)이 있는지 판별."""
+    if not word:
+        return False
+    ch = word[-1]
+    if '가' <= ch <= '힣':
+        return (ord(ch) - 0xAC00) % 28 != 0
+    return False  # 숫자/영문 등은 받침 없음으로 처리
+
+def josa(word: str, with_batchim: str, without_batchim: str) -> str:
+    """받침 유무에 따라 조사 선택 (예: josa('병원','이','가')='병원이')."""
+    return word + (with_batchim if _has_batchim(word) else without_batchim)
+
 # 도메인: (주체, 데이터, 민감유형)
 DOMAINS = [
     ("병원", "환자 진료 기록", SensitiveType.HEALTH, "a hospital", "patient medical records"),
@@ -77,7 +90,9 @@ def frag_preserve(c, en=False):
 
 def build_text(subj, data, c, en=False):
     if not en:
-        s = f"{subj}가 {frag_lawful(c)} {data}을(를) {frag_consent(c, c.sensitive_type!=SensitiveType.NONE)} 수집하고, {frag_purpose(c)} {frag_use(c)}.{frag_preserve(c)}"
+        subj_j = josa(subj, "이", "가")
+        data_j = josa(data, "을", "를")
+        s = f"{subj_j} {frag_lawful(c)} {data_j} {frag_consent(c, c.sensitive_type!=SensitiveType.NONE)} 수집하고, {frag_purpose(c)} {frag_use(c)}.{frag_preserve(c)}"
     else:
         s = f"{subj} collects {data} {frag_lawful(c, True)}, {frag_consent(c, c.sensitive_type!=SensitiveType.NONE, True)}, {frag_purpose(c, True)}, {frag_use(c, True)}.{frag_preserve(c, True)}"
     return s.strip()

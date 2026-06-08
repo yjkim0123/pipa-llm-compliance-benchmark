@@ -1,28 +1,28 @@
 [
   {
     "model": "gemma2:2b-instruct-q4_0",
-    "b_en_only": 35,
-    "c_ko_only": 49,
-    "chi2": 2.01,
-    "p": 0.15606926343164362,
+    "b_en_only": 40,
+    "c_ko_only": 45,
+    "chi2": 0.19,
+    "p": 0.6643894431719992,
     "sig": "ns",
     "direction": "KO>EN"
   },
   {
     "model": "gemma2:2b-instruct-q8_0",
     "b_en_only": 38,
-    "c_ko_only": 61,
-    "chi2": 4.89,
-    "p": 0.027030076547772452,
-    "sig": "*",
+    "c_ko_only": 57,
+    "chi2": 3.41,
+    "p": 0.0647817816074836,
+    "sig": "ns",
     "direction": "KO>EN"
   },
   {
     "model": "gemma2:9b-instruct-q4_0",
-    "b_en_only": 95,
-    "c_ko_only": 10,
-    "chi2": 67.2,
-    "p": 2.220446049250313e-16,
+    "b_en_only": 94,
+    "c_ko_only": 13,
+    "chi2": 59.81,
+    "p": 1.0436096431476471e-14,
     "sig": "***",
     "direction": "EN>KO"
   },
@@ -37,37 +37,37 @@
   },
   {
     "model": "llama3.2:3b-instruct-q8_0",
-    "b_en_only": 30,
-    "c_ko_only": 41,
-    "chi2": 1.41,
-    "p": 0.23531375547707434,
+    "b_en_only": 28,
+    "c_ko_only": 38,
+    "chi2": 1.23,
+    "p": 0.2679380840341796,
     "sig": "ns",
     "direction": "KO>EN"
   },
   {
     "model": "phi3:3.8b-mini-4k-instruct-q4_0",
-    "b_en_only": 58,
-    "c_ko_only": 9,
-    "chi2": 34.39,
-    "p": 4.514846052572352e-09,
+    "b_en_only": 53,
+    "c_ko_only": 10,
+    "chi2": 28.0,
+    "p": 1.2131545079618888e-07,
     "sig": "***",
     "direction": "EN>KO"
   },
   {
     "model": "phi3:3.8b-mini-4k-instruct-q8_0",
-    "b_en_only": 52,
+    "b_en_only": 47,
     "c_ko_only": 6,
-    "chi2": 34.91,
-    "p": 3.4463079057189816e-09,
+    "chi2": 30.19,
+    "p": 3.919908908578407e-08,
     "sig": "***",
     "direction": "EN>KO"
   },
   {
     "model": "qwen2.5:7b-instruct-q4_0",
-    "b_en_only": 48,
-    "c_ko_only": 51,
-    "chi2": 0.04,
-    "p": 0.8406926603054861,
+    "b_en_only": 50,
+    "c_ko_only": 55,
+    "chi2": 0.15,
+    "p": 0.6962703401140229,
     "sig": "ns",
     "direction": "KO>EN"
   }
