@@ -1,0 +1,18 @@
+{
+  "ko": {
+    "lawful_basis": 0.98,
+    "is_sensitive": 0.9228571428571428,
+    "consent_ok": 0.7257142857142858,
+    "purpose_specified": 0.98,
+    "within_purpose": 0.9657142857142857,
+    "_all_nodes": 0.6171428571428571
+  },
+  "en": {
+    "lawful_basis": 0.9742857142857143,
+    "is_sensitive": 0.9885714285714285,
+    "consent_ok": 0.6942857142857143,
+    "purpose_specified": 0.9685714285714285,
+    "within_purpose": 1.0,
+    "_all_nodes": 0.6314285714285715
+  }
+}

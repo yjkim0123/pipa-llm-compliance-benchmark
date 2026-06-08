@@ -1,0 +1,74 @@
+[
+  {
+    "model": "gemma2:2b-instruct-q4_0",
+    "b_en_only": 35,
+    "c_ko_only": 49,
+    "chi2": 2.01,
+    "p": 0.15606926343164362,
+    "sig": "ns",
+    "direction": "KO>EN"
+  },
+  {
+    "model": "gemma2:2b-instruct-q8_0",
+    "b_en_only": 38,
+    "c_ko_only": 61,
+    "chi2": 4.89,
+    "p": 0.027030076547772452,
+    "sig": "*",
+    "direction": "KO>EN"
+  },
+  {
+    "model": "gemma2:9b-instruct-q4_0",
+    "b_en_only": 95,
+    "c_ko_only": 10,
+    "chi2": 67.2,
+    "p": 2.220446049250313e-16,
+    "sig": "***",
+    "direction": "EN>KO"
+  },
+  {
+    "model": "llama3.2:3b-instruct-q4_0",
+    "b_en_only": 49,
+    "c_ko_only": 34,
+    "chi2": 2.36,
+    "p": 0.12436687936260848,
+    "sig": "ns",
+    "direction": "EN>KO"
+  },
+  {
+    "model": "llama3.2:3b-instruct-q8_0",
+    "b_en_only": 30,
+    "c_ko_only": 41,
+    "chi2": 1.41,
+    "p": 0.23531375547707434,
+    "sig": "ns",
+    "direction": "KO>EN"
+  },
+  {
+    "model": "phi3:3.8b-mini-4k-instruct-q4_0",
+    "b_en_only": 58,
+    "c_ko_only": 9,
+    "chi2": 34.39,
+    "p": 4.514846052572352e-09,
+    "sig": "***",
+    "direction": "EN>KO"
+  },
+  {
+    "model": "phi3:3.8b-mini-4k-instruct-q8_0",
+    "b_en_only": 52,
+    "c_ko_only": 6,
+    "chi2": 34.91,
+    "p": 3.4463079057189816e-09,
+    "sig": "***",
+    "direction": "EN>KO"
+  },
+  {
+    "model": "qwen2.5:7b-instruct-q4_0",
+    "b_en_only": 48,
+    "c_ko_only": 51,
+    "chi2": 0.04,
+    "p": 0.8406926603054861,
+    "sig": "ns",
+    "direction": "KO>EN"
+  }
+]
