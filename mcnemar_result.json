@@ -1,5 +1,14 @@
 [
   {
+    "model": "exaone3.5:7.8b",
+    "b_en_only": 73,
+    "c_ko_only": 27,
+    "chi2": 20.25,
+    "p": 6.795346249477419e-06,
+    "sig": "***",
+    "direction": "EN>KO"
+  },
+  {
     "model": "gemma2:2b-instruct-q4_0",
     "b_en_only": 40,
     "c_ko_only": 45,
@@ -45,6 +54,15 @@
     "direction": "KO>EN"
   },
   {
+    "model": "mistral:7b",
+    "b_en_only": 28,
+    "c_ko_only": 24,
+    "chi2": 0.17,
+    "p": 0.6773916019262773,
+    "sig": "ns",
+    "direction": "EN>KO"
+  },
+  {
     "model": "phi3:3.8b-mini-4k-instruct-q4_0",
     "b_en_only": 53,
     "c_ko_only": 10,
@@ -61,6 +79,15 @@
     "p": 3.919908908578407e-08,
     "sig": "***",
     "direction": "EN>KO"
+  },
+  {
+    "model": "qwen2.5:3b-instruct",
+    "b_en_only": 42,
+    "c_ko_only": 51,
+    "chi2": 0.69,
+    "p": 0.4067868333984652,
+    "sig": "ns",
+    "direction": "KO>EN"
   },
   {
     "model": "qwen2.5:7b-instruct-q4_0",
